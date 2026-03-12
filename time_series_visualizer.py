@@ -24,7 +24,8 @@ def draw_line_plot():
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
-    df_bar = df.groupby([df.index.year.rename('year'), df.index.month_name().rename('Months')])['value'].mean().round().reset_index()
+    df_bar = df.copy()
+    df_bar = df_bar.groupby([df_bar.index.year.rename('year'), df_bar.index.month_name().rename('Months')])['value'].mean().round().reset_index()
     m_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     df_bar['Months'] = pd.Categorical(df_bar['Months'], categories = m_order, ordered=True)
 
